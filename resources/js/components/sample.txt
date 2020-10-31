@@ -1,0 +1,93 @@
+<template>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Assign Role <span><select name="role_id" v-model="data.role_id" id="type" class="form-control pull-right" style="width:200px">
+                            <Option :value="r.role_id"   v-for="(r, i) in roles" :key="i">{{r.roleName}}</Option>
+                        </select></span></h4>
+                  <p class="card-category">we Can Assign role for Different User</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="">
+                                <th>
+                                    Resource Name
+                                </th>
+                                <th>
+                                   Read
+                                </th>
+                                 <th>
+                                    Write
+                                </th>
+                                <th>
+                                    Update
+                                </th>
+                                <th>
+                                  Delete
+                                </th>
+                                
+                            </thead>
+                            <tbody>
+                                 <tr v-for="(r, i) in resources" :key="i">
+                                    <td>{{r.resourceName}}</td>
+                                    <td>
+                                       yes
+                                    </td>
+                                    <td>
+                                       yes
+                                    </td>
+                                    <td>
+                                       yes
+                                    </td>
+                                    <td>
+                                       yes
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+</template>
+<script>
+export default{
+   data(){
+    return{
+        data:{
+            roleName:'',
+            role_id:null
+        },
+        resources:[
+
+        ],
+          roles:[
+               {resourceName: 'dashboard', read:false, write:false, update:false, delete:false, name:'dashboard'},
+               {resourceName: 'tags', read:false, write:false, update:false, delete:false, name:'tags'},
+                {resourceName: 'category', read:false, write:false, update:false, delete:false, name:'category'},
+                 {resourceName: 'user', read:false, write:false, update:false, delete:false, name:'user'},
+                  {resourceName: 'role', read:false, write:false, update:false, delete:false, name:'role'},
+                   {resourceName: 'assignrole', read:false, write:false, update:false, delete:false, name:'assignrole'},
+          ]
+  }
+ },
+ methods :{
+            async loadRole($){
+             try{
+                 await axios.get('/app/get_role')
+               .then((data) => (this.roles = data[0]));
+                 }catch(e){
+                console.log(e)
+             }         
+            }
+           
+},
+created(){
+    console.log(this.$route);
+     this.loadRole()
+}
+}
+</script>

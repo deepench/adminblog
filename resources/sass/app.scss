@@ -1,0 +1,15 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+// @import '~material-dashboard/assets/css/material-dashboard.css'
+@import "~material-dashboard/assets/css/material-dashboard.css";
+
+.router-link-exact-active {
+    background-color: #cbd4db !important;
+    color: #ffffff;
+}
